@@ -1,0 +1,19 @@
+h1{
+    color: green;
+    background: red;  
+}
+
+p{
+    color: blue;
+    background-color: gold;
+}
+.my-comp-paragrafo{
+    color:aqua;
+    background-color: yellow;
+}
+.red-title{
+    color: red;
+}
+.blue-title{
+    color: blue;
+}
