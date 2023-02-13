@@ -5,3 +5,10 @@ Att: Na pasta do projeto
 npm start 
 
 Att: na pasta do app
+
+
+Hooks
+
+useState Verifica se uma variavel vai ser alterarda atraves de um set e atualiza todo o componente
+
+useEffect faz com que determinada ação seja executada só uma vez isso é interessante porque os componenetes do react estão sempre se reenderizando ele possui um array de dependencia que ao alterar irá acionar a função uma unica vez
