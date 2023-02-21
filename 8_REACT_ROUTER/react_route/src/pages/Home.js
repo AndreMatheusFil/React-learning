@@ -12,6 +12,7 @@ const Home = () => {
     <div>
       <h1>Produtos</h1>
       {error && <p>{error}</p>}
+      {loading && <p>Carregando...</p>}
       <ul className='products'>
         {itens && itens.map(item => (
           <li id={item.id}>
