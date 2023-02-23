@@ -12,6 +12,8 @@ npm install react-router-dom
 
 rafce - para gerar o arquivo 
 
+npm audit fix --force
+
 Hooks
 
 useState Verifica se uma variavel vai ser alterarda atraves de um set e atualiza todo o componente
