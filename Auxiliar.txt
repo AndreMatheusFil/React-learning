@@ -6,9 +6,11 @@ npm start
 
 Att: na pasta do app
 
+para mudar o titulo da página é lá na pasta public no index.html
+
 npm install json-server
 
-npm install react-router-dom
+npm i react-router-dom
 
 rafce - para gerar o arquivo 
 
