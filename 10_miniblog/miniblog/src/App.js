@@ -1,66 +1,85 @@
 import React from 'react';
-import './App.css';
+import "./App.css";
 
-//Funções
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
-//hooks
-import { useState,useEffect } from 'react';
-import { useAuthentication } from './hooks/useAuthentication';
+// hooks
+import { useState, useEffect } from "react";
+import { useAuthentication } from "./hooks/useAuthentication";
 
-//Contexto
-import { AuthProvider } from './context/AuthContext';
+// pages
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Post from "./pages/Post/Post";
 
-//componentes
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+// components
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import CreatePost from "./pages/CreatePost/CreatePost";
+import Search from "./pages/Search/Search";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Dashbord from "./pages/Dashbord/Dashbord";
+import EditPost from "./pages/EditPost/EditPost";
 
-//pages
-import About from './pages/About/About';
-import Home from './pages/Home/Home';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
-import CreatePost from './pages/CreatePost/CreatePost';
-import Dashbord from './pages/Dashbord/Dashbord';
-
-
-
+// context
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  const [user,setUser] = useState(undefined);
-  const{auth} = useAuthentication();
+  const [user, setUser] = useState(undefined);
+  const { auth } = useAuthentication();
+
   const loadingUser = user === undefined;
 
-  useEffect(()=>{
-    onAuthStateChanged(auth,(user)=>{
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
       setUser(user);
-    })
-  },[auth])
+    });
+  }, [auth]);
 
-  if (loadingUser){
-    return <p>Carregando....</p>
+  if (loadingUser) {
+    return <p>Carregando...</p>;
   }
-    return (
-      <div className="App">
+
+  return (
+    <div className="App">
       <AuthProvider value={{ user }}>
         <BrowserRouter>
-        <Navbar/>
-          <div className='container'>
+          <Navbar />
+          <div className="container">
             <Routes>
-              <Route path='/' element={<Home />}/>
-              <Route path='/About' element={<About />}/>
-              <Route path='/Login' element={!user ? <Login />: <Navigate to='/'/>}/>
-              <Route path='/Register' element={!user ? <Register /> : <Navigate to='/'/>}/>
-              <Route path='/Post/Create' element={user ? <CreatePost/> : <Navigate to='/login'/>}/>
-              <Route path='/Dashbord' element={user ? <Dashbord/> : <Navigate to='/login'/>}/>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route
+                path="/post/create"
+                element={user ? <CreatePost /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/post/edit/:id"
+                element={user ? <EditPost /> : <Navigate to="/login" />}
+              />
+              <Route path="/posts/:id" element={<Post />} />
+              <Route path="/search" element={<Search />} />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/register"
+                element={!user ? <Register /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/dashbord"
+                element={user ? <Dashbord /> : <Navigate to="/login" />}
+              />
             </Routes>
           </div>
-        <Footer />
+          <Footer />
         </BrowserRouter>
       </AuthProvider>
-      </div>
-    );
+    </div>
+  );
 }
 
 export default App;

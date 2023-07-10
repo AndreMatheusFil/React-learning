@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from "./CreatePost.module.css";
 
 import { useState } from "react";
