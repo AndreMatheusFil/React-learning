@@ -22,6 +22,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Dashbord from "./pages/Dashbord/Dashbord";
 import EditPost from "./pages/EditPost/EditPost";
+import Loader from './components/Loader';
 
 // context
 import { AuthProvider } from "./context/AuthContext";
@@ -39,7 +40,7 @@ function App() {
   }, [auth]);
 
   if (loadingUser) {
-    return <p>Carregando...</p>;
+    return <Loader />;
   }
 
   return (

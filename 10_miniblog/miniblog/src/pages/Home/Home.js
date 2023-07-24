@@ -9,13 +9,20 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useFetchDocuments } from '../../hooks/useFetchDocuments'
 //componentes
 import PostDetail from '../../components/PostDetail'
+import Loader from '../../components/Loader'
 
 const Home = () => {
   const [query,setQuery] =useState('');
   const { documents:posts , loading} =useFetchDocuments("posts");
+ 
+  const Navigate = useNavigate()
 
   const handleSubmit = (e) =>{
     e.preventDefault();
+
+    if (query){
+      return Navigate(`/search?q=${query}`);
+    }
   }
 
   return (
@@ -26,7 +33,7 @@ const Home = () => {
         <button className="btn btn-dark">Pesquisar</button>
       </form>
       <div>
-        {loading && <p>Carregando...</p>}
+        {loading && <Loader />}
         {posts && posts.map((post) =>(
           <PostDetail id={post.id} post ={post} />
         ))}
